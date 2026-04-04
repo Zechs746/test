@@ -1,4 +1,4 @@
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require('discord.js');
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -65,6 +65,22 @@ client.on(Events.InteractionCreate, async interaction => {
 		console.error(error);
 		await interaction.reply({ content: 'コマンドがありません', ephemeral: true });
 	}
+});
+
+
+
+
+
+//カスタムステータス
+
+client.on('ready', (c) => {
+    console.log(`✅ ${c.user.tag} is online.`);
+
+    client.user.setActivity({
+      name: 'ちんかす',
+      type: ActivityType.Streaming,
+      url: 'https://youtu.be/rlNJ31EzwJM?si=Pb3pBESjMfFIcI2f',
+    });
 });
 
 client.login(process.env.TOKEN);
