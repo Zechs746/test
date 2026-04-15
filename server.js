@@ -16,9 +16,19 @@ app.get("/", (req, res) => {
 })
 
 // サーバーを起動
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
     console.log(`サーバーを開きました`);
   });
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error('❌ ポート3000は既に使用されています');
+    console.error('別のプロセスを終了するか、別のポートを使用してください');
+    process.exit(1);
+  } else {
+    throw err;
+  }
+});
   
   if (process.env.TOKEN == undefined || process.env.TOKEN == "") {
     console.log("TOKENを設定してください");

@@ -79,8 +79,73 @@ client.on('ready', (c) => {
     client.user.setActivity({
       name: 'ちんかす',
       type: ActivityType.Streaming,
-      url: 'https://youtu.be/rlNJ31EzwJM?si=Pb3pBESjMfFIcI2f',
+      url: 'https://www.youtube.com/watch?v=5An-UA0u5Mc',
     });
 });
+
+
+
+
+
+
+
+
+
+//Ai
+
+const { GoogleGenerativeAI } = Require('@google/genai');
+
+
+// Discordクライアント初期化
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ]
+});
+
+// Gemini API初期化
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+client.once('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('messageCreate', async (message) => {
+    // ボットのメッセージは無視
+    if (message.author.bot) return;
+
+    // 「!gemini 」で始まるメッセージに反応
+    if (message.content.startsWith('!gemini ')) {
+        const prompt = message.content.slice(8);
+
+        try {
+            // タイピング中の演出
+            await message.channel.sendTyping();
+
+            // Geminiで回答を生成
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            const text = response.text();
+
+            // 2000文字制限対策（簡易版）
+            if (text.length > 2000) {
+                message.reply(text.substring(0, 1900) + '... (長すぎるため省略)');
+            } else {
+                message.reply(text);
+            }
+        } catch (error) {
+            console.error('エラーが発生しました:', error);
+            message.reply('ごめん、うまく考えられなかったみたい。');
+        }
+    }
+});
+
+
+
+
+
 
 client.login(process.env.TOKEN);
