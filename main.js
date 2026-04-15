@@ -79,7 +79,7 @@ client.on('ready', (c) => {
     client.user.setActivity({
       name: 'ちんかす',
       type: ActivityType.Streaming,
-      url: 'https://youtu.be/rlNJ31EzwJM?si=Pb3pBESjMfFIcI2f',
+      url: 'https://www.youtube.com/watch?v=5An-UA0u5Mc',
     });
 });
 
