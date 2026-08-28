@@ -5,28 +5,8 @@
   },
   "dependencies": {
     "@discordjs/voice": "^0.19.2",
-    "@google/genai": "^1.50.1",
-    "@google/generative-ai": "^0.24.1",
-    "discord.js": "^14.26.3",
-    "dotenv": "^16.6.1",
-    "express": "^4.21.2",
-    "kazagumo": "^3.4.3",
-    "kazagumo-spotify": "^2.1.1",
-    "shoukaku": "^4.3.0"
-  },
-  "version": "1.0.0",
-  "description": "discord Botのテンプレです 使い方などはこちらの動画を参考にしてください",
-  "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Zechs746/test.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Zechs746/test/issues"
-  },
-  "homepage": "https://github.com/Zechs746/test#readme"
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
 }
